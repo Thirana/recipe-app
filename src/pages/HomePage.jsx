@@ -56,7 +56,10 @@ const HomePage = () => {
 
           <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {/* when the data fetching is completed, this part will be shown */}
-            {!loading && <RecipeCard />}
+            {!loading &&
+              recipes.map(({ recipe }, index) => (
+                <RecipeCard key={index} recipe={recipe} />
+              ))}
 
             {/* until the data is fetching, this part will be shown */}
             {loading &&
