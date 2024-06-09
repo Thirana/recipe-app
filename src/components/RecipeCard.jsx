@@ -4,11 +4,13 @@ const getTwoValuesFromArray = (arr) => {
   return [arr[0], arr[1]];
 };
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, bg, badge }) => {
   const healthLabels = getTwoValuesFromArray(recipe.healthLabels);
 
   return (
-    <div className="flex flex-col rounded-md bg-[#ecf7d4] overflow-hidden p-3 relative'">
+    <div
+      className={`flex flex-col rounded-md ${bg} overflow-hidden p-3 relative`}
+    >
       <a href="#" className="relative h-32">
         <img
           src={recipe.image}
@@ -39,7 +41,7 @@ const RecipeCard = ({ recipe }) => {
         {healthLabels.map((label, idx) => (
           <div
             key={idx}
-            className={`flex gap-1 bg-[#d6f497] items-center p-1 rounded-md`}
+            className={`flex gap-1 ${badge} items-center p-1 rounded-md`}
           >
             <HeartPulse size={16} />
             <span className="text-sm tracking-tighter font-semibold">
