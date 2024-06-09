@@ -1,5 +1,5 @@
 const FavoritePage = () => {
-  const fav = false;
+  const fav = true;
 
   return (
     <div className="bg-[#faf9fb] flex-1 p-10 min-h-screen">
@@ -9,6 +9,15 @@ const FavoritePage = () => {
         {!fav && (
           <div className="h-[80vh] flex flex-col items-center gap-4">
             <img src="/404.svg" className="h-3/4" alt="404 svg" />
+          </div>
+        )}
+
+        {fav && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <h2>HII</h2>
+            <h2>HII</h2>
+            <h2>HII</h2>
+            <h2>HII</h2>
           </div>
         )}
       </div>
