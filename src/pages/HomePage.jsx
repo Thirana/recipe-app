@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import RecipeCard from "../components/RecipeCard";
 
 const APP_ID = "e495cde3";
 const APP_KEY = "386f41503683ee8d07ee3247f7834d41";
@@ -18,7 +19,8 @@ const HomePage = () => {
       );
 
       const data = await res.json();
-      console.log(data);
+      setRecipes(data.hits);
+      console.log(data.hits);
     } catch (error) {
       console.log(console.error.message);
     } finally {
@@ -52,7 +54,23 @@ const HomePage = () => {
             Popular Choices
           </p>
 
-          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {/* when the data fetching is completed, this part will be shown */}
+            {!loading && <RecipeCard />}
+
+            {/* until the data is fetching, this part will be shown */}
+            {loading &&
+              [...Array(9)].map((_, index) => (
+                <div key={index} className="flex flex-col gap-4 w-full">
+                  <div className="skeleton h-32 w-full"></div>
+                  <div className="flex justify-between">
+                    <div className="skeleton h-4 w-28"></div>
+                    <div className="skeleton h-4 w-24"></div>
+                  </div>
+                  <div className="skeleton h-4 w-1/2"></div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </>
