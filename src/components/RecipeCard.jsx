@@ -1,4 +1,5 @@
 import { Heart, HeartPulse, Soup } from "lucide-react";
+import { useState } from "react";
 
 const getTwoValuesFromArray = (arr) => {
   return [arr[0], arr[1]];
@@ -6,6 +7,30 @@ const getTwoValuesFromArray = (arr) => {
 
 const RecipeCard = ({ recipe, bg, badge }) => {
   const healthLabels = getTwoValuesFromArray(recipe.healthLabels);
+  const [isFavorite, setIsFavorite] = useState(
+    localStorage.getItem("favorites")?.includes(recipe.label)
+  );
+
+  const addRecipeToFavorites = () => {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isRecipeAlreadyInFavorites = favorites.some(
+      (fav) => fav.label === recipe.label
+    );
+
+    // remove from the favorites array if the item  is already in favorites
+    if (isRecipeAlreadyInFavorites) {
+      favorites = favorites.filter((fav) => fav.label !== recipe.label);
+      setIsFavorite(false);
+    }
+    // add the item to the favorites array if its not in favorites
+    else {
+      favorites.push(recipe);
+      setIsFavorite(true);
+    }
+
+    // puss the favorites array to the local storage
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
 
   return (
     <div
@@ -26,8 +51,24 @@ const RecipeCard = ({ recipe, bg, badge }) => {
           <Soup size={16} /> {recipe.yield} Servings
         </div>
 
-        <div className="absolute top-1 right-2 bg-white rounded-full p-1 cursor-pointer">
-          <Heart size={20} className="hover:fill-red-500 hover:text-red-500" />
+        <div
+          className="absolute top-1 right-2 bg-white rounded-full p-1 cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault();
+            addRecipeToFavorites();
+          }}
+        >
+          {/* if item is not in favorietes, use this style */}
+          {!isFavorite && (
+            <Heart
+              size={20}
+              className="hover:fill-red-500 hover:text-red-500"
+            />
+          )}
+          {/* if item is in favorietes, use this style */}
+          {isFavorite && (
+            <Heart size={20} className="fill-red-500 text-red-500" />
+          )}
         </div>
       </a>
 
