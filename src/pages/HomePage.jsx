@@ -21,7 +21,7 @@ const HomePage = () => {
 
       const data = await res.json();
       setRecipes(data.hits);
-      console.log(data.hits);
+      // console.log(data.hits);
     } catch (error) {
       console.log(console.error.message);
     } finally {
@@ -29,15 +29,22 @@ const HomePage = () => {
     }
   };
 
+  // for initial loading
   useEffect(() => {
     fetchRecipes("chicken");
   }, []);
+
+  // for handle search inputs
+  const handleSearchRecipe = (e) => {
+    e.preventDefault();
+    fetchRecipes(e.target[0].value);
+  };
 
   return (
     <>
       <div className="bg-[#faf9fb] p-10 flex-1">
         <div className="max-w-screen-lg mx-auto">
-          <form>
+          <form onSubmit={handleSearchRecipe}>
             <label className="input shadow-md flex items-center gap-2">
               <Search size={"24"} />
               <input
