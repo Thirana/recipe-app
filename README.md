@@ -1,8 +1,37 @@
-# React + Vite
+# Recipe Finder Application | React & TailwindCSS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##### deployed site: [recipe-app](https://recipe-app-rust-two.vercel.app/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## User Features
+
+- users can search recipes
+- users can open youtube video for recipe
+- recipes can be added and removed as favorite
+
+## Technical features
+
+- random bg color for each recipe card
+- loading skelton for recipe card and recipe image
+
+## Run Locally
+
+#### Setup .env file
+
+```js
+VITE_APP_ID = your_edamam_app_id;
+VITE_APP_KEY = your_edamam_app_key;
+```
+
+#### Install dependendencies
+
+```shell
+npm install
+```
+
+#### Start the app
+
+```shell
+npm run dev
+```
